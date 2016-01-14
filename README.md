@@ -2,6 +2,8 @@
 
 A pong game, written in Ruby using Gosu. Sound effects were created with [Bfxr](http://www.bfxr.net).
 
+![demo](https://raw.githubusercontent.com/subdigital/pong/master/pong.gif)
+
 ## Running the game
 
 It requires [gosu](https://www.libgosu.org) to run. To install gosu:
