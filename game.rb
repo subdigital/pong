@@ -5,7 +5,6 @@ class GameWindow < Gosu::Window
   attr_reader :score
   attr_reader :blip_sound
   attr_reader :explosion_sound
-  attr_accessor :counter
 
   def initialize
     super 640, 480
@@ -37,12 +36,12 @@ class GameWindow < Gosu::Window
       # play sound
       @ball.reflect_horizontal
       @blip_sound.play
-      tick_counter
+      increase_speed
     elsif @ball.collide?(@enemy)
       # play sound
       @ball.reflect_horizontal
       @blip_sound.play
-      tick_counter
+      increase_speed
     elsif @ball.x <= 0
       score[1] += 1
       @ball.reflect_horizontal
@@ -58,12 +57,8 @@ class GameWindow < Gosu::Window
     @ball.reflect_vertical if @ball.y < 0 || @ball.bottom > self.height
   end
 
-  def tick_counter
-    self.counter += 1
-    if self.counter > 1
-      @ball.v[:x] = @ball.v[:x] * 1.1
-      self.counter = 0
-    end
+  def increase_speed
+    @ball.v[:x] = @ball.v[:x] * 1.1
   end
 
   def player_move
@@ -79,11 +74,6 @@ class GameWindow < Gosu::Window
   end
 
   def ai_move
-    unless @last_enemy_y
-      @last_enemy_y = @enemy.center_y
-      return
-    end
-
     pct_move = 0
     distance = @enemy.center_x - @ball.center_x
     if distance > self.width / 3
@@ -99,8 +89,6 @@ class GameWindow < Gosu::Window
 
     @enemy.top = 0 if @enemy.top <= 0
     @enemy.bottom = self.height if @enemy.bottom >= self.height
-
-    @last_enemy_y = @enemy.center_y
   end
 
   def flash_side(side)
