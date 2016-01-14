@@ -43,13 +43,15 @@ class GameWindow < Gosu::Window
       @blip_sound.play
       increase_speed
     elsif @ball.x <= 0
+      @ball.x = @player.right
       score[1] += 1
-      @ball.reflect_horizontal
+      @ball.v[:x] = 4
       flash_side(:left)
       @explosion_sound.play
     elsif @ball.right >= self.width
+      @ball.x = @enemy.left
       score[0] += 1
-      @ball.reflect_horizontal
+      @ball.v[:x] = -4
       flash_side(:right)
       @explosion_sound.play
     end
