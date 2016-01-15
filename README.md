@@ -33,7 +33,7 @@ The point is to finish something, ship it and move on.
 
 ## What's Next?
 
-Probably Breakout.
+[Tic-tac-toe](https://github.com/subdigital/tic-tac-toe)
 
 ## LICENSE
 
