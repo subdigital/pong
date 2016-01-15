@@ -26,6 +26,13 @@ class GameWindow < Gosu::Window
     load_sounds
   end
 
+  def button_down(id)
+    case id
+    when Gosu::KbEscape
+      close
+    end
+  end
+
   def update
     player_move
     ai_move
