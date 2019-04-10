@@ -83,12 +83,11 @@ class GameWindow < Gosu::Window
   end
 
   def ai_move
-    pct_move = 0
     distance = @enemy.center_x - @ball.center_x
-    if distance > self.width / 3
-      pct_move = 0.05
-    elsif distance > self.width / 2
+    if distance > self.width / 2
       pct_move = 0.1
+    elsif distance > self.width / 3
+      pct_move = 0.05
     else
       pct_move = 0.14
     end
@@ -151,9 +150,8 @@ class GameWindow < Gosu::Window
   end
 
   def load_sounds
-    path = File.expand_path(File.dirname(__FILE__))
-    @blip_sound = Gosu::Sample.new(File.join(path, "blip.wav"))
-    @explosion_sound = Gosu::Sample.new(File.join(path, "explosion.wav"))
+    @blip_sound = Gosu::Sample.new("blip.wav")
+    @explosion_sound = Gosu::Sample.new("explosion.wav")
   end
 end
 
@@ -199,7 +197,7 @@ class GameObject
   end
 
   def center_x
-    x + x/2
+    x + w/2
   end
 
   def bottom=(b)
@@ -250,7 +248,7 @@ class Paddle < GameObject
   end
 
   def draw
-    Gosu.draw_rect x, y, w, h, Gosu::Color.argb(0xff_ffffff)
+    Gosu.draw_rect x, y, w, h, Gosu::Color::WHITE
   end
 end
 
